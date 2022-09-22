@@ -318,6 +318,11 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Pegawai',
+            'url'  => '/pegawai',
+            'icon' => 'fas fa-fw fa-users',
+        ],
+        [
             'text' => 'History Galon',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-warehouse',
