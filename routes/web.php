@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/pelanggan', 'PelangganController@getIndex')->name('pelanggan');
+Route::post('/pelanggan', 'PelangganController@postSave')->name('pelanggan');
+
