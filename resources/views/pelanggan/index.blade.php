@@ -4,9 +4,9 @@
 
 @section('content_header')
     <div style="padding:5px;" class="text-right">
-        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-plus"></i></a>
+        <a href="#" class="btn btn-primary btn-sm tambah-pelanggan" ><i class="fas fa-user-plus"></i></a>
     </div>
-    @include('pelanggan.tambah')   
+    @include('pelanggan.modal')
 @stop
 
 @section('content')
@@ -32,14 +32,13 @@
                             <td>{{$row->pelanggan_nama}}</td>
                             <td>{{$row->pelanggan_telepon}}</td>
                             <td>{{$row->pelanggan_alamat}}</td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td>{{$row->lastdate ? : '-'}}</td>
+                            <td>{{$row->laststock ? : 0}}</td>
                             <td>{{$row->pelanggan_jenis}}</td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></a>
-                                <a href="" class="btn btn-primary btn-sm"><i class="fas fa-wrench"></i></a>
-                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-shopping-cart"></i></a>
-                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                <a href="" class="btn btn-primary btn-sm edit-pelanggan" data-id="{{$row->pelanggan_id}}" data-toggle="modal" data-target="#editModal"><i class="fas fa-wrench"></i></a>
+                                <a href="" class="btn btn-info btn-sm order" data-id="{{$row->pelanggan_id}}" data-toggle="modal" data-target="#tambahTransaksiModal"><i class="fas fa-shopping-cart"></i></a>
+                                <a href="" class="btn btn-danger btn-sm delete"  data-id="{{$row->pelanggan_id}}" ><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -53,13 +52,79 @@
 
 @section('css')
 <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 @stop
 
 @section('js')
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script>
     $(document).ready( function () {
         $('#table').DataTable();
-    } );
+        $('#history').DataTable();
+
+        editPelanggan();
+        tambahPelanggan();
+        order();
+    });
+
+    function tambahPelanggan(){
+        $('.tambah-pelanggan').click(function(){   
+        // AJAX request
+        $.ajax({
+            url: "{{action('PelangganController@getModalTambah')}}",
+            type: 'get',
+            success: function(response){ 
+                    // Add response in Modal body
+                    $('#content-header').html('Tambah Pelanggan');
+                    $('#content-popup').html(response);
+
+                    // Display Modal
+                    $('#modalPopUp').modal('show'); 
+                }
+            });
+        });
+    }
+    function editPelanggan(){
+        $('.edit-pelanggan').click(function(){   
+        var userid = $(this).data('id');
+        // AJAX request
+        $.ajax({
+            url: "{{action('PelangganController@getModalEdit')}}"+'?id='+userid,
+            type: 'get',
+            success: function(response){ 
+
+                    // Add response in Modal body
+                    $('#content-header').html('Edit Pelanggan');
+                    $('#content-popup').html(response);
+
+                    // Display Modal
+                    $('#modalPopUp').modal('show'); 
+                }
+            });
+        });
+    }
+    function order(){
+        $('.order').click(function(){   
+        var userid = $(this).data('id');
+        // AJAX request
+        $.ajax({
+            url: "{{action('PelangganController@getModalOrder')}}"+'?id='+userid,
+            type: 'get',
+            success: function(response){ 
+
+                    // Add response in Modal body
+                    $('#content-header').html('Order Galon');
+                    $('#content-popup').html(response);
+
+                    // Display Modal
+                    $('#sizePopUp').addClass('modal-lg');
+                    $('#modalPopUp').modal('show'); 
+                }
+            });
+        });
+    }
 </script>
 @stop

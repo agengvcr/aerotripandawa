@@ -25,4 +25,10 @@ Auth::routes();
 
 Route::get('/pelanggan', 'PelangganController@getIndex')->name('pelanggan');
 Route::post('/pelanggan', 'PelangganController@postSave')->name('pelanggan');
+Route::post('/pelanggan/edit', 'PelangganController@postEdit')->name('pelanggan');
+Route::get('/pelanggan/modal-edit', 'PelangganController@getModalEdit')->name('pelanggan');
+Route::get('/pelanggan/modal-tambah', 'PelangganController@getModalTambah')->name('pelanggan');
+Route::get('/pelanggan/modal-order', 'PelangganController@getModalOrder')->name('pelanggan');
+
+
 
