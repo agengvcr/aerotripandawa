@@ -38,7 +38,7 @@
                             <td>
                                 <a href="" class="btn btn-primary btn-sm edit-pelanggan" data-id="{{$row->pelanggan_id}}" data-toggle="modal" data-target="#editModal"><i class="fas fa-wrench"></i></a>
                                 <a href="" class="btn btn-info btn-sm order" data-id="{{$row->pelanggan_id}}" data-toggle="modal" data-target="#tambahTransaksiModal"><i class="fas fa-shopping-cart"></i></a>
-                                <a href="" class="btn btn-danger btn-sm delete"  data-id="{{$row->pelanggan_id}}" ><i class="fas fa-trash"></i></a>
+                                <a href="{{action('PelangganController@postDelete').'?id='.$row->pelanggan_id}}" class="btn btn-danger btn-sm delete"  data-id="{{$row->pelanggan_id}}" ><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

@@ -19,16 +19,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/pelanggan', 'PelangganController@getIndex')->name('pelanggan');
+    Route::post('/pelanggan/save', 'PelangganController@postSave')->name('pelanggan');
+    Route::post('/pelanggan/edit', 'PelangganController@postEdit')->name('pelanggan');
+    Route::post('/pelanggan/order', 'PelangganController@postOrder')->name('pelanggan');
+    Route::get('/pelanggan/delete', 'PelangganController@postDelete')->name('pelanggan');
 
-Auth::routes();
+    Route::get('/pelanggan/modal-edit', 'PelangganController@getModalEdit')->name('pelanggan');
+    Route::get('/pelanggan/modal-tambah', 'PelangganController@getModalTambah')->name('pelanggan');
+    Route::get('/pelanggan/modal-order', 'PelangganController@getModalOrder')->name('pelanggan');
+});
 
-Route::get('/pelanggan', 'PelangganController@getIndex')->name('pelanggan');
-Route::post('/pelanggan', 'PelangganController@postSave')->name('pelanggan');
-Route::post('/pelanggan/edit', 'PelangganController@postEdit')->name('pelanggan');
-Route::get('/pelanggan/modal-edit', 'PelangganController@getModalEdit')->name('pelanggan');
-Route::get('/pelanggan/modal-tambah', 'PelangganController@getModalTambah')->name('pelanggan');
-Route::get('/pelanggan/modal-order', 'PelangganController@getModalOrder')->name('pelanggan');
 
 
 

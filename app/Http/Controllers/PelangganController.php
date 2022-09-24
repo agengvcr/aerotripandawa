@@ -11,7 +11,7 @@ class PelangganController extends Controller
         from pelanggan 
         left join(
             select 
-            coalesce(sum(movement_in - movement_out),0) as laststock,
+            coalesce(sum(movement_out - movement_in),0) as laststock,
             max(movement_date) as lastdate,
             movement_pelanggan_id
             from movement 
@@ -66,21 +66,52 @@ class PelangganController extends Controller
             ]);
             return redirect()->action('PelangganController@getIndex')->with('successMessage','Berhasil Di Ubah');
         } catch (\Throwable $th) {
-
-            dd($th);
-            //throw $th;
+            
         }
     }
 
-    public function postOrder(Request $request){
+    public function postDelete(Request $request){
+        try {
+            //code...
+            DB::table('pelanggan')
+            ->where('pelanggan_id',$request->input('id'))
+            ->update([
+                    'pelanggan_active' => 0,
+            ]);
+
+            return redirect()->action('PelangganController@getIndex')->with('successMessage','Berhasil Di Hapus');
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd($th);
+        }
         
+    }
+
+    public function postOrder(Request $request){
+        try {
+            //
+            DB::table('movement')->insert(
+                [
+                    'movement_date' => $request->input('date'),
+                    'movement_in' => $request->input('in') ? : 0,
+                    'movement_out' => $request->input('out') ? : 0,
+                    'movement_active' => 1,
+                    'movement_pelanggan_id' => $request->input('id')
+                ]
+            );
+
+            return redirect()->action('PelangganController@getIndex')->with('successMessage','Berhasil Di Ubah');
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
     }
 
     public function getModalOrder(Request $request){
         $id = $request->input('id');
         $galon = DB::selectOne("
             select 
-            sum(movement_in - movement_out) as laststock,
+            sum(movement_out - movement_in) as laststock,
             max(movement_date) as lastdate 
             from movement 
             where movement_pelanggan_id =?
@@ -97,7 +128,7 @@ class PelangganController extends Controller
 
 
         $data = new \stdClass();
-        $data->laststock = isset($galon->laststock) ? $model->laststock : 0;
+        $data->laststock = isset($galon->laststock) ? $galon->laststock : 0;
         $data->lastdate = isset($galon->lastdate) ? $galon->lastdate: null;
         $data->history = $history;
         $data->profil = $profil;

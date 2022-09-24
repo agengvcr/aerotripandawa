@@ -1,7 +1,7 @@
-<form method="POST" action="{{action('PelangganController@postSave')}}">
+<form method="POST" action="{{action('PelangganController@postOrder')}}">
     @csrf
     <div class="modal-body">
-        <input type="hidden" name="pelangganId" value="{{$model->profil->pelanggan_id}}">
+        <input type="hidden" name="id" value="{{$model->profil->pelanggan_id}}">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
@@ -59,14 +59,18 @@
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
-                                <th>In</th>
-                                <th>Out</th>
+                                <th>Tarik</th>
+                                <th>Kirim</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($model->history as $history)
                             <tr>
-                                <td></td>
+                                <td>{{$history->movement_date}}</td>
+                                <td>{{$history->movement_in}}</td>
+                                <td>{{$history->movement_out}}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -77,3 +81,17 @@
         <button type="submit" class="btn btn-primary">Order</button>
     </div>
 </form>
+
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    $(document).ready( function () {
+        $('#history').DataTable({
+    "bPaginate": false,
+    "bLengthChange": false,
+    "bFilter": false,
+    "bInfo": false,
+    "bAutoWidth": false });
+    });
+</script>
