@@ -317,21 +317,21 @@ return [
             'url'  => '/pelanggan',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'Pegawai',
-            'url'  => '/pegawai',
-            'icon' => 'fas fa-fw fa-users',
-        ],
+        // [
+        //     'text' => 'Pegawai',
+        //     'url'  => '/pegawai',
+        //     'icon' => 'fas fa-fw fa-users',
+        // ],
         [
             'text' => 'History Galon',
             'url'  => '/galon',
             'icon' => 'fas fa-fw fa-warehouse',
         ],
-        [
-            'text' => 'Transaksi',
-            'url'  => 'admin/settings',
-            'icon' => 'far fa-money-bill-alt',
-        ],
+        // [
+        //     'text' => 'Transaksi',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'far fa-money-bill-alt',
+        // ],
         
     ],
 
