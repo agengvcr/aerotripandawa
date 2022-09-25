@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/pelanggan/modal-edit', 'PelangganController@getModalEdit')->name('pelanggan');
     Route::get('/pelanggan/modal-tambah', 'PelangganController@getModalTambah')->name('pelanggan');
     Route::get('/pelanggan/modal-order', 'PelangganController@getModalOrder')->name('pelanggan');
+
+    Route::get('/galon', 'GalonController@index')->name('pelanggan');
+
+
+
 });
 
 

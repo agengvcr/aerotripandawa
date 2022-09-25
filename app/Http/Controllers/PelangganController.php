@@ -135,7 +135,6 @@ class PelangganController extends Controller
         $data->utang = 0;
 
         return view('pelanggan.order')->with('model',$data);
-    }
-
+    }   
     
 }

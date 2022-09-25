@@ -324,7 +324,7 @@ return [
         ],
         [
             'text' => 'History Galon',
-            'url'  => 'admin/settings',
+            'url'  => '/galon',
             'icon' => 'fas fa-fw fa-warehouse',
         ],
         [
