@@ -13,14 +13,15 @@ class GalonController extends Controller
         $model = DB::select("
             select 
                 movement_date,
-                sum(movement_out) as total_out,
-                sum(movement_in) as total_in
+                pelanggan_nama,
+                movement_out as total_out,
+                movement_in as total_in
             from movement
             join pelanggan
                 on pelanggan_id = movement_pelanggan_id
                 and pelanggan_active = '1'
             where movement_active = '1'
-            group by movement_date
+            
         ");
 
         return view('galon.index')
