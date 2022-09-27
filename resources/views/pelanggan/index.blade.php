@@ -88,7 +88,7 @@
         });
     }
     function editPelanggan(){
-        $('.edit-pelanggan').click(function(){   
+        $("body").on("click", ".edit-pelanggan",function(){   
         var userid = $(this).data('id');
         // AJAX request
         $.ajax({
@@ -107,7 +107,7 @@
         });
     }
     function order(){
-        $("body").on("click", ".order",(function(){   
+        $("body").on("click", ".order",function(){   
         var userid = $(this).data('id');
         // AJAX request
         $.ajax({
