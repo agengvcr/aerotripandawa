@@ -34,7 +34,7 @@ class GalonController extends Controller
             DB::table('movement')
             ->where('movement_id',$request->input('id'))
             ->update([
-                    'movement_active' => '0',
+                    'movement_active' => 0,
             ]);
 
             return redirect()->action('PelangganController@getIndex')->with('successMessage','Berhasil Di Hapus');
