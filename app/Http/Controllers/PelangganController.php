@@ -7,6 +7,13 @@ use DB;
 class PelangganController extends Controller
 {
     public function getIndex(Request $request){
+        $total_galon = DB::selectOne("
+            select sum(laststock) as totalgalon 
+            from(select 
+            sum(movement_out - movement_in) as laststock,
+            max(movement_date) as lastdate 
+            from movement 
+            where movement_active = '1') as x ");
         $model = DB::select("select * 
         from pelanggan 
         left join(
@@ -21,7 +28,7 @@ class PelangganController extends Controller
             on movement_pelanggan_id = pelanggan_id
         where pelanggan_active = '1'");
 
-        return view('pelanggan.index')->with('model',$model);
+        return view('pelanggan.index')->with('model',$model)->with('total_galon',$total_galon);
     }
 
     public function getModalTambah(Request $request){  

@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="row">
-             
+         <h4>Total Galon : {{$total_galon->totalgalon}}</h4>    
         <div class="col-md-12">
             <table id="table" class="table table-striped" style="width:100%">
                 <thead>
