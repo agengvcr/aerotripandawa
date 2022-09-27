@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pelanggan/modal-order', 'PelangganController@getModalOrder')->name('pelanggan');
 
     Route::get('/galon', 'GalonController@index')->name('pelanggan');
-
+    Route::get('/galon/delete','GalonController@postDelete')->name('pelanggan');
 
 
 });

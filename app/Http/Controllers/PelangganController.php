@@ -115,10 +115,11 @@ class PelangganController extends Controller
             max(movement_date) as lastdate 
             from movement 
             where movement_pelanggan_id =?
+            and movement_active = '1'
             group by movement_pelanggan_id ",[$id]);
-
+        
         $history = DB::select("
-            select * from movement where movement_pelanggan_id = ? order by movement_date
+            select * from movement where movement_pelanggan_id = ? and movement_active = '1' order by movement_date
         ",[$id]);
 
         $profil = DB::selectOne("

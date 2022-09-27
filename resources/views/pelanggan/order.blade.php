@@ -53,32 +53,40 @@
                     <div class="col-sm-8">
                         <input type="number"  name="utang" class="form-control"id="inputPassword" placeholder="Utang">
                     </div>
-                </div>
-                <div>
-                    <table id="history" class="table">
-                        <thead>
-                            <tr>
-                                <th>Tanggal</th>
-                                <th>Tarik</th>
-                                <th>Kirim</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($model->history as $history)
-                            <tr>
-                                <td>{{$history->movement_date}}</td>
-                                <td>{{$history->movement_in}}</td>
-                                <td>{{$history->movement_out}}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                </div> 
+                <div class="form-group">
+                    <!-- <label for="inputPassword" class="col-sm-3 col-form-label"></label> -->
+                    <div class="col-sm-8">
+                        <button type="submit" class="btn btn-primary">Order</button>
+                    </div>
+                </div> 
+         
+            </div>
+            <div class="col-sm-12">
+                <table id="history" class="table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Tarik</th>
+                            <th>Kirim</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($model->history as $history)
+                        <tr>
+                            <td>{{$history->movement_date}}</td>
+                            <td>{{$history->movement_in}}</td>
+                            <td>{{$history->movement_out}}</td>
+                            <td><a href="{{action('GalonController@postDelete').'?id='.$history->movement_id}}" class="btn btn-danger btn-sm">Delete</a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Order</button>
     </div>
 </form>
 

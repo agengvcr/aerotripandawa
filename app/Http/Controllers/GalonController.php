@@ -26,4 +26,22 @@ class GalonController extends Controller
         return view('galon.index')
         ->with('model',$model);
     }
+
+    public function postDelete(Request $request){
+
+        try {
+            //code...
+            DB::table('movement')
+            ->where('movement_id',$request->input('id'))
+            ->update([
+                    'movement_active' => '0',
+            ]);
+
+            return redirect()->action('PelangganController@getIndex')->with('successMessage','Berhasil Di Hapus');
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd($th);
+        }
+        
+    }
 }
