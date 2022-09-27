@@ -107,7 +107,7 @@
         });
     }
     function order(){
-        $('.order').click(function(){   
+        $("body").on("click", ".order",(function(){   
         var userid = $(this).data('id');
         // AJAX request
         $.ajax({
