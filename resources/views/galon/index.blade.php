@@ -23,9 +23,9 @@
                         @foreach($model as $row)
                         <tr>
                             <td>{{\Carbon\Carbon::parse($row->movement_date)->format('d-M-Y')}}</td>
-                            <td>{{$row->pelanggan_nama}}</td>
                             <td>{{$row->total_in}}</td>
                             <td>{{$row->total_out}}</td>
+                            <td>{{$row->total_in + $row->total_out}}</td>
                         </tr>
                         @endforeach
                     @endif
